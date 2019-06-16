@@ -1,0 +1,16 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "ios": {
+    "host": "localhost",
+    "port": 5432,
+    "url": "",
+    "database": "iosdb",
+    "password": "1234",
+    "name": "ios",
+    "user": "postgres",
+    "connector": "postgresql"
+  }
+}

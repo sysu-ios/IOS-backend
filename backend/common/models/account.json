@@ -1,0 +1,63 @@
+{
+  "name": "Account",
+  "plural": "account",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "Number"
+    },
+    "PhoneNumber": {
+      "type": "String"
+    },
+    "UserName": {
+      "type": "String"
+    },
+    "Password": {
+      "type": "String"
+    },
+    "UserIcon": {
+      "type": "String"
+    },
+    "Email": {
+      "type": "String"
+    },
+    "Introduction": {
+      "type": "String"
+    },
+    "Sex": {
+      "type": "String"
+    },
+    "Birthday": {
+      "type": "String"
+    },
+    "Region": {
+      "type": "String"
+    },
+    "PostNum": {
+      "type": "Number"
+    },
+    "PraiseNum": {
+      "type": "Number"
+    },
+    "AttentionNum": {
+      "type": "Number"
+    },
+    "FanNum": {
+      "type": "Number"
+    },
+    "createdAt": {
+      "type": "date"
+    },
+    "lastModifiedAt": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": []
+  
+}
