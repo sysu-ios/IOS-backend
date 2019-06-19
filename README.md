@@ -32,11 +32,7 @@ ip: 172.18.32.213
 
 ## 用户
 
-#### 登陆
-
-参数
-
-- 免密登陆`get`
+#### 免密登陆`get`
 
 ```
 http://localhost:3000/api/account/loginNoPd
@@ -66,9 +62,7 @@ phone: "17620124723"
 }
 ```
 
-
-
-- 密码登陆`post`
+#### 密码登陆`post`
 
 ```
 http://localhost:3000/api/account/loginByPd
@@ -103,9 +97,7 @@ http://localhost:3000/api/account/loginByPd
 }
 ```
 
-
-
-- 忘记密码(设置新密码)`post`
+#### 忘记密码(设置新密码)`post`
 
 参数：
 
@@ -140,9 +132,7 @@ http://localhost:3000/api/account/changePd
 }
 ```
 
-#### 注册
-
-`post`
+#### 注册`post`
 
 ```
 http://localhost:3000/api/account/register
@@ -179,9 +169,7 @@ http://localhost:3000/api/account/register
 }
 ```
 
-#### 查询
-
-- 根据手机号获取详细信息`get`
+#### 获取详细信息`get`
 
 ```
 http://localhost:3000/api/account/findByPhone
@@ -231,9 +219,7 @@ phone: "17620124723"
 }
 ```
 
-#### 更新
-
-- 根据手机号更新详细信息`post`
+#### 更新详细信息`post`
 
 ```
 http://localhost:3000/api/account/updateUser
@@ -275,7 +261,7 @@ http://localhost:3000/api/account/updateUser
 
 ## 关注
 
-- 关注`post`
+#### 关注`post`
 
 ```
 http://localhost:3000/api/subscribe
@@ -299,7 +285,7 @@ http://localhost:3000/api/subscribe
 }
 ```
 
-- 取消关注`post`
+#### 取消关注`post`
 
 ```
 http://localhost:3000/api/subscribe/delete
@@ -326,7 +312,53 @@ http://localhost:3000/api/subscribe/delete
 }
 ```
 
-- 获取关注列表`get`
+#### 获取用户的关注列表`get`
+
+```
+http://localhost:3000/api/subscribe/getByPhone
+```
+
+参数：
+
+```json
+phone: "17620124723"
+```
+
+返回：
+
+```json
+//成功
+{
+  "response": {
+    "code": 200,
+    "message": "success",
+    "data": [
+      {
+        "id": 1,
+        "first": "17620124723",
+        "second": "17620124724"
+      },
+      {
+        "id": 2,
+        "first": "17620124723",
+        "second": "17620124725"
+      }
+    ]
+  }
+}
+//失败
+{
+  "response": {
+    "code": 200,
+    "message": "fail",
+    "error": "no subscribe"
+  }
+}
+```
+
+
+
+#### 获取全部关注列表`get`
 
 ```
 http://localhost:3000/api/subscribe
@@ -354,11 +386,11 @@ http://localhost:3000/api/subscribe
 ]
 ```
 
+
+
 ## 文章
 
-#### 发布文章
-
-`post`
+#### 发布文章`post`
 
 ```
 http://localhost:3000/api/news/post
@@ -369,7 +401,7 @@ http://localhost:3000/api/news/post
 ```json
 {
   "Content": "string",
-  "Picture": [1,2,3],
+  "Picture": ["string","string","string"],
   "PhoneNumber": "17620124724"
 }
 ```
@@ -386,9 +418,7 @@ http://localhost:3000/api/news/post
 }
 ```
 
-#### 删除文章
-
-`get`
+#### 删除文章`get`
 
 ```
 http://localhost:3000/api/news/delete
@@ -420,15 +450,13 @@ id: 0
 }
 ```
 
-#### 图片上传
-
-`post`
+#### 图片上传`post`
 
 ```
 http://localhost:3000/api/StorageFile/upload
 ```
 
-参数
+参数：
 
 ```
 Upload one or more files into the specified container. The request body must use multipart/form-data which is the file input type for HTML uses.
@@ -440,7 +468,7 @@ http://localhost:3000
 必须包含文件后缀
 ```
 
-返回
+返回：
 
 ```json
 //成功
@@ -480,17 +508,13 @@ http://localhost:3000
 }
 ```
 
-
-
-#### 请求关注用户的文章
-
-`get`
+#### 请求关注用户的文章列表`get`
 
 ```
-http://localhost:3000/api/news/getRecommend
+http://localhost:3000/api/news/getRecommendList
 ```
 
-参数
+参数：
 
 ```json
 string: 17620124724
@@ -507,33 +531,45 @@ string: 17620124724
     "data": [
       {
         "id": 2,
+        "UserName": "test1",
         "Content": "string",
         "Picture": [
-          1,
-          2,
-          3
+          "string",
+          "string",
+          "string"
         ],
-        "PhoneNumber": "17620124724",
-        "PraiseNum": 0,
+        "createdAt": "2019-06-19T15:54:11.636Z",
         "CommentNum": 0,
         "ShareNum": 0,
-        "createdAt": "2019-06-19T09:54:22.882Z",
-        "lastModifiedAt": "2019-06-19T09:54:22.882Z"
+        "PraiseNum": 0
       },
       {
         "id": 3,
+        "UserName": "test1",
         "Content": "string",
         "Picture": [
-          1,
-          2,
-          3
+          "string",
+          "string",
+          "string"
         ],
-        "PhoneNumber": "17620124724",
-        "PraiseNum": 0,
+        "createdAt": "2019-06-19T16:07:53.321Z",
         "CommentNum": 0,
         "ShareNum": 0,
-        "createdAt": "2019-06-19T09:55:44.892Z",
-        "lastModifiedAt": "2019-06-19T09:55:44.892Z"
+        "PraiseNum": 0
+      },
+      {
+        "id": 4,
+        "UserName": "test",
+        "Content": "string",
+        "Picture": [
+          "string",
+          "string",
+          "string"
+        ],
+        "createdAt": "2019-06-19T16:07:59.201Z",
+        "CommentNum": 0,
+        "ShareNum": 0,
+        "PraiseNum": 0
       }
     ]
   }
@@ -548,6 +584,57 @@ string: 17620124724
   }
 }
 //无新闻
+{
+  "response": {
+    "code": 200,
+    "message": "fail",
+    "error": "no news"
+  }
+}
+
+```
+
+#### 请求具体文章`get`
+
+文章作者和`id`由文章列表传入
+
+```
+http://localhost:3000/api/news/getNewsById
+```
+
+参数：
+
+```json
+id: 3
+UserName: "test"
+```
+
+返回：
+
+```json
+//成功
+{
+  "response": {
+    "code": 200,
+    "message": "success",
+    "data": {
+      "id": 3,
+      "UserName": "test",
+      "Content": "string",
+      "Picture": [
+        "string",
+        "string",
+        "string"
+      ],
+      "createdAt": "2019-06-19T16:07:53.321Z",
+      "CommentNum": 0,
+      "ShareNum": 0,
+      "PraiseNum": 0
+    }
+  }
+}
+
+//失败
 {
   "response": {
     "code": 200,

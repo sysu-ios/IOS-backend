@@ -37,7 +37,7 @@ module.exports = function (News) {
                 cb(null, res);
             }
             else {
-                News.destroyById(id,function (err) {
+                News.destroyById(id, function (err) {
                     var res = {
                         code: 200,
                         message: 'success'
@@ -46,11 +46,12 @@ module.exports = function (News) {
                 });
             }
         });
-        
+
     };
-    News.getRecommend = function (phone, cb) {
+    News.getRecommendList = function (phone, cb) {
         console.info(phone);
         var Subscribe = app.models.Subscribe;
+        var Account = app.models.Account;
         Subscribe.find({ where: { first: phone } }, function (err, instance) {
             if (instance.length == 0) {
                 var res = {
@@ -67,29 +68,97 @@ module.exports = function (News) {
                     console.info(instance[i].second)
                     resPhone[i] = instance[i].second;
                 }
-                console.info(resPhone);
-                News.find({ where: { PhoneNumber: { "inq": resPhone } } }, function (err, instance) {
-                    if (instance.length == 0) {
+                Account.find({ where: { PhoneNumber: { "inq": resPhone } } }, function (err, instance1) {
+                    if (instance1.length == 0) {
                         var res = {
                             code: 200,
                             message: 'fail',
-                            error: 'no news'
+                            error: 'no account'
                         };
                         cb(null, res);
                     }
+
                     else {
-                        var res = {
-                            code: 200,
-                            message: 'success',
-                            data: instance
-                        };
-                        cb(null, res);
+
+                        News.find({ where: { PhoneNumber: { "inq": resPhone } } }, function (err, instance2) {
+                            if (instance2.length == 0) {
+                                var res = {
+                                    code: 200,
+                                    message: 'fail',
+                                    error: 'no news'
+                                };
+                                cb(null, res);
+                            }
+                            else {
+                                var objs = [];
+                                instance2.forEach(function (item) {
+                                    var UserName = '';
+                                    console.info(item.PhoneNumber);
+                                    for (var i = 0; i < instance1.length; i++) {
+                                        if (instance1[i].PhoneNumber == item.PhoneNumber) {
+                                            UserName = instance1[i].UserName;
+                                            break;
+                                        }
+                                    }
+                                    console.info(UserName);
+                                    objs.push({
+                                        id: item.id,
+                                        UserName: UserName,
+                                        Content: item.Content,
+                                        Picture: item.Picture,
+                                        createdAt: item.createdAt,
+                                        CommentNum: item.CommentNum,
+                                        ShareNum: item.ShareNum,
+                                        PraiseNum: item.PraiseNum
+                                    });
+                                });
+                                var res = {
+                                    code: 200,
+                                    message: 'success',
+                                    data: objs
+                                };
+                                cb(null, res);
+                            }
+                        });
                     }
                 });
+                console.info(resPhone);
+
+
             }
         });
 
     };
+    News.getNewsById = function(id,UserName, cb) {
+        News.findOne({ where: { id: id } }, function (err, instance) {
+            if (instance == null) {
+                var res = {
+                    code: 200,
+                    message: 'fail',
+                    error: 'no news'
+                };
+                cb(null, res);
+            }
+            else {
+                var objs={
+                    id: instance.id,
+                    UserName: UserName,
+                    Content: instance.Content,
+                    Picture: instance.Picture,
+                    createdAt: instance.createdAt,
+                    CommentNum: instance.CommentNum,
+                    ShareNum: instance.ShareNum,
+                    PraiseNum: instance.PraiseNum
+                };
+                var res = {
+                    code: 200,
+                    message: 'success',
+                    data: objs
+                };
+                cb(null, res);
+            }
+        });
+    }
 
     News.remoteMethod('post',
         {
@@ -97,10 +166,18 @@ module.exports = function (News) {
             accepts: { arg: 'data', type: 'object', required: true, http: { source: 'body' } },
             returns: { arg: 'response', type: 'object' }
         });
-    News.remoteMethod('getRecommend',
+    News.remoteMethod('getRecommendList',
         {
-            http: { path: '/getRecommend', verb: 'get' },
-            accepts: { arg: 'phone', type: 'string', required: true, http: { source: 'query' } },
+            http: { path: '/getRecommendList', verb: 'get' },
+            accepts: {arg: 'phone', type: 'string', required: true, http: { source: 'query' } },
+            returns: { arg: 'response', type: 'object' }
+        });
+    News.remoteMethod('getNewsById',
+        {
+            http: { path: '/getNewsById', verb: 'get' },
+            accepts: 
+            [{ arg: 'id', type: 'number', required: true, http: { source: 'query' } },
+            { arg: 'UserName', type: 'string', required: true, http: { source: 'query' } }],
             returns: { arg: 'response', type: 'object' }
         });
     News.remoteMethod('delete',

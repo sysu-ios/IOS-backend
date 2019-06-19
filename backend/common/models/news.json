@@ -15,7 +15,7 @@
     },
     "Picture": {
       "type": [
-        "number"
+        "String"
       ]
     },
     "PhoneNumber": {
