@@ -1,6 +1,6 @@
 {
-  "name": "picture",
-  "plural": "picture",
+  "name": "StorageFile",
+  "plural": "StorageFile",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -8,14 +8,17 @@
   },
   "properties": {
     "id": {
-      "type": "number",
-      "required": true
+      "type": "number"
     },
-    "data": {
-      "type": "string",
-      "required": true
+    "type": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
     }
-
   },
   "validations": [],
   "relations": {},

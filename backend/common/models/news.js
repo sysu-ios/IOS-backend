@@ -18,7 +18,8 @@ module.exports = function (News) {
         News.create(data, function (err, instance) {
             var res = {
                 code: 201,
-                message: 'success'
+                message: 'success',
+                articleId: instance.id
             };
             console.info(instance);
             cb(null, res);

@@ -1,5 +1,11 @@
 # Feeds流后端API
 
+API: http://localhost:3000/explorer
+
+url: http://localhost:3000
+
+ip: 172.18.32.213
+
 ## 状态码
 
 - 200 OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）。
@@ -363,7 +369,7 @@ http://localhost:3000/api/news/post
 ```json
 {
   "Content": "string",
-  "Picture": "string",
+  "Picture": [1,2,3],
   "PhoneNumber": "17620124724"
 }
 ```
@@ -374,7 +380,8 @@ http://localhost:3000/api/news/post
 {
   "response": {
     "code": 201,
-    "message": "success"
+    "message": "success",
+    "articleId": 3
   }
 }
 ```
@@ -413,6 +420,66 @@ id: 0
 }
 ```
 
+#### 图片上传
+
+`post`
+
+```
+http://localhost:3000/api/StorageFile/upload
+```
+
+参数
+
+```
+Upload one or more files into the specified container. The request body must use multipart/form-data which is the file input type for HTML uses.
+可以参考
+http://localhost:3000
+采用multipart/form-data数据类型
+可以一次上传多个文件
+可以自动修改文件名
+必须包含文件后缀
+```
+
+返回
+
+```json
+//成功
+//单文件
+{
+    "code": 200,
+    "message": "success",
+    "data": [{"id":9,
+              "type":"image/png",
+              "name":"snipaste_2019-06-04_14-20-161560957639894.png",
+              "url":"/api/containers/common/download/snipaste_2019-06-04_14-20-161560957639894.png"
+             }]
+}
+ 
+//多文件
+{"code":200,"message":"success","data":[{"id":11,"type":"image/png","name":"snipaste_2019-06-04_14-18-031560957756108.png","url":"/api/containers/common/download/snipaste_2019-06-04_14-18-031560957756108.png"},{"id":10,"type":"image/png","name":"snipaste_2019-06-04_14-18-141560957756108.png","url":"/api/containers/common/download/snipaste_2019-06-04_14-18-141560957756108.png"}]}
+{
+    "code": 200,
+    "message": "success",
+    "data": [{"id":11,
+              "type":"image/png",
+              "name":"snipaste_2019-06-04_14-18-031560957756108.png",
+              "url":"/api/containers/common/download/snipaste_2019-06-04_14-18-031560957756108.png"
+             },
+             {"id":10,
+              "type":"image/png",
+              "name":"snipaste_2019-06-04_14-18-141560957756108.png",
+              "url":"/api/containers/common/download/snipaste_2019-06-04_14-18-141560957756108.png"}
+            ]}
+}
+
+//失败
+{
+    "code":200,
+    "message":"fail",
+    "error":"No file content uploaded"
+}
+```
+
 
 
 #### 请求关注用户的文章
@@ -439,24 +506,34 @@ string: 17620124724
     "message": "success",
     "data": [
       {
-        "id": 3,
+        "id": 2,
         "Content": "string",
-        "Picture": "string",
-        "PhoneNumber": "17620124725",
+        "Picture": [
+          1,
+          2,
+          3
+        ],
+        "PhoneNumber": "17620124724",
         "PraiseNum": 0,
         "CommentNum": 0,
-        "createdAt": "2019-06-19T06:12:56.534Z",
-        "lastModifiedAt": "2019-06-19T06:12:56.534Z"
+        "ShareNum": 0,
+        "createdAt": "2019-06-19T09:54:22.882Z",
+        "lastModifiedAt": "2019-06-19T09:54:22.882Z"
       },
       {
-        "id": 4,
+        "id": 3,
         "Content": "string",
-        "Picture": "string",
-        "PhoneNumber": "17620124725",
+        "Picture": [
+          1,
+          2,
+          3
+        ],
+        "PhoneNumber": "17620124724",
         "PraiseNum": 0,
         "CommentNum": 0,
-        "createdAt": "2019-06-19T06:21:47.042Z",
-        "lastModifiedAt": "2019-06-19T06:21:47.042Z"
+        "ShareNum": 0,
+        "createdAt": "2019-06-19T09:55:44.892Z",
+        "lastModifiedAt": "2019-06-19T09:55:44.892Z"
       }
     ]
   }

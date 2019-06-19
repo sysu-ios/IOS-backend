@@ -58,16 +58,7 @@
     }
   },
   "validations": [],
-  "relations": {
-    "post": {
-      "type": "hasMany",
-      "model": "News",
-      "foreignKey": "PhoneNumber",
-      "options": {
-        "nestRemoting": true
-      }
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

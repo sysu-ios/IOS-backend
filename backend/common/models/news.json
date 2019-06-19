@@ -14,7 +14,9 @@
       "type": "String"
     },
     "Picture": {
-      "type": "String"
+      "type": [
+        "number"
+      ]
     },
     "PhoneNumber": {
       "type": "String"
@@ -24,6 +26,10 @@
       "default": 0
     },
     "CommentNum": {
+      "type": "Number",
+      "default": 0
+    },
+    "ShareNum": {
       "type": "Number",
       "default": 0
     },

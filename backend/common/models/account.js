@@ -1,3 +1,4 @@
+
 module.exports = function (Account) {
   Account.observe('before save', function (ctx, next) {
     var now = new Date();
@@ -9,7 +10,7 @@ module.exports = function (Account) {
     }
     next();
   });
-
+  
   Account.findByName = function (name, cb) {
     Account.find({ where: { UserName: name } }, function (err, instance) {
       if (instance.length == 0) {

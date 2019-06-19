@@ -55,16 +55,17 @@ ds.automigrate('Account', function (err) {
         });
     });
 });
+
 ds.automigrate('News', function (err) {
     if (err) throw err;
 
     var accounts = [
         {
-            UserName: 'test1',
-            Picture: '',
-            Content:'',
             PhoneNumber: '17620124723',
+            Picture: [1],
+            Content: '',
             PraiseNum: 2,
+            ShareNum: 2,
             CommentNum: 3,
             createdAt: new Date(),
             lastModifiedAt: new Date()
@@ -74,15 +75,14 @@ ds.automigrate('News', function (err) {
     accounts.forEach(function (account) {
         app.models.News.create(account, function (err, model) {
             if (err) throw err;
-
             console.log('Created:', model);
-
             count--;
             if (count === 0)
                 ds.disconnect();
         });
     });
 });
+
 ds.automigrate('Subscribe', function (err) {
     if (err) throw err;
 
@@ -95,6 +95,30 @@ ds.automigrate('Subscribe', function (err) {
     var count = accounts.length;
     accounts.forEach(function (account) {
         app.models.Subscribe.create(account, function (err, model) {
+            if (err) throw err;
+
+            console.log('Created:', model);
+
+            count--;
+            if (count === 0)
+                ds.disconnect();
+        });
+    });
+});
+
+ds.automigrate('StorageFile', function (err) {
+    if (err) throw err;
+
+    var accounts = [
+        {
+            "type": "string",
+            "name": "string",
+            "url": "string"
+        }
+    ];
+    var count = accounts.length;
+    accounts.forEach(function (account) {
+        app.models.StorageFile.create(account, function (err, model) {
             if (err) throw err;
 
             console.log('Created:', model);

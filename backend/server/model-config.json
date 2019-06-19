@@ -51,7 +51,11 @@
     "dataSource": "ios",
     "public": true
   },
-  "picture": {
+  "Container": {
+    "dataSource": "picture",
+    "public": true
+  },
+  "StorageFile": {
     "dataSource": "ios",
     "public": true
   }
