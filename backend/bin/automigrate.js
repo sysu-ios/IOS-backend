@@ -19,7 +19,7 @@ ds.automigrate('Account', function (err) {
             Region: 'guangdong',
             PostNum: 1,
             PraiseNum: 2,
-            AttentionNum: 3,
+            Attention: 0,
             FanNum: 4,
             createdAt: new Date(),
             lastModifiedAt: new Date()
@@ -28,7 +28,7 @@ ds.automigrate('Account', function (err) {
             UserName: 'test2',
             Password: 'test2',
             UserIcon: '',
-            PhoneNumber: '17620124723',
+            PhoneNumber: '17620124724',
             Email: '1299927852@qq.com',
             Introduction: 'test2',
             Sex: 'woman',
@@ -36,7 +36,7 @@ ds.automigrate('Account', function (err) {
             Region: 'guangdong',
             PostNum: 1,
             PraiseNum: 2,
-            AttentionNum: 3,
+            Attention: 0,
             FanNum: 4,
             createdAt: new Date(),
             lastModifiedAt: new Date()
@@ -45,6 +45,56 @@ ds.automigrate('Account', function (err) {
     var count = accounts.length;
     accounts.forEach(function (account) {
         app.models.Account.create(account, function (err, model) {
+            if (err) throw err;
+
+            console.log('Created:', model);
+
+            count--;
+            if (count === 0)
+                ds.disconnect();
+        });
+    });
+});
+ds.automigrate('News', function (err) {
+    if (err) throw err;
+
+    var accounts = [
+        {
+            UserName: 'test1',
+            Picture: '',
+            Content:'',
+            PhoneNumber: '17620124723',
+            PraiseNum: 2,
+            CommentNum: 3,
+            createdAt: new Date(),
+            lastModifiedAt: new Date()
+        }
+    ];
+    var count = accounts.length;
+    accounts.forEach(function (account) {
+        app.models.News.create(account, function (err, model) {
+            if (err) throw err;
+
+            console.log('Created:', model);
+
+            count--;
+            if (count === 0)
+                ds.disconnect();
+        });
+    });
+});
+ds.automigrate('Subscribe', function (err) {
+    if (err) throw err;
+
+    var accounts = [
+        {
+            first: '17620124723',
+            second: '17620124724'
+        }
+    ];
+    var count = accounts.length;
+    accounts.forEach(function (account) {
+        app.models.Subscribe.create(account, function (err, model) {
             if (err) throw err;
 
             console.log('Created:', model);

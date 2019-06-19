@@ -1,19 +1,21 @@
 {
-  "name": "test",
-  "plural": "test",
+  "name": "picture",
+  "plural": "picture",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "test1": {
-      "type": [
-        "string"
-      ],
-      "required": true,
-      "default": "test"
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "data": {
+      "type": "string",
+      "required": true
     }
+
   },
   "validations": [],
   "relations": {},

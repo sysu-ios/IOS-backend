@@ -1,18 +1,20 @@
 {
-  "name": "test",
-  "plural": "test",
+  "name": "Subscribe",
+  "plural": "subscribe",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "test1": {
-      "type": [
-        "string"
-      ],
-      "required": true,
-      "default": "test"
+    "id": {
+      "type": "Number"
+    },
+    "first": {
+      "type": "string"
+    },
+    "second": {
+      "type": "string"
     }
   },
   "validations": [],

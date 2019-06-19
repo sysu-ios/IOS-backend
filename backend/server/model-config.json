@@ -35,9 +35,6 @@
     "dataSource": "db",
     "public": false
   },
-  "Message": {
-    "dataSource": null
-  },
   "test": {
     "dataSource": "db",
     "public": true
@@ -46,7 +43,15 @@
     "dataSource": "ios",
     "public": true
   },
-  "news": {
+  "News": {
+    "dataSource": "ios",
+    "public": true
+  },
+  "Subscribe": {
+    "dataSource": "ios",
+    "public": true
+  },
+  "picture": {
     "dataSource": "ios",
     "public": true
   }

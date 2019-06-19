@@ -1,6 +1,6 @@
 {
-  "name": "News",
-  "plural": "news",
+  "name": "Comment",
+  "plural": "comment",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -10,13 +10,10 @@
     "id": {
       "type": "number"
     },
+    "ArticleId": {
+      "type": "number"
+    },
     "Content": {
-      "type": "String"
-    },
-    "Picture": {
-      "type": "String"
-    },
-    "PhoneNumber": {
       "type": "String"
     },
     "PraiseNum": {

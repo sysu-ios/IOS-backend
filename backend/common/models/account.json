@@ -44,7 +44,8 @@
       "type": "Number"
     },
     "AttentionNum": {
-      "type": "Number"
+      "type": "Number",
+      "default": 0
     },
     "FanNum": {
       "type": "Number"
@@ -57,7 +58,16 @@
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": []
-  
+  "relations": {
+    "post": {
+      "type": "hasMany",
+      "model": "News",
+      "foreignKey": "PhoneNumber",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
 }

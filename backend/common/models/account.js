@@ -12,7 +12,7 @@ module.exports = function (Account) {
 
   Account.findByName = function (name, cb) {
     Account.find({ where: { UserName: name } }, function (err, instance) {
-      if (instance == null) {
+      if (instance.length == 0) {
         var res = {
           code: 200,
           message: 'fail',
@@ -97,7 +97,7 @@ module.exports = function (Account) {
       console.info(count);
       if (count == 1) {
         Account.findOne({ where: { PhoneNumber: user.PhoneNumber } }, function (err, instance) {
-          if (instance.Password == user.Password){
+          if (instance.Password == user.Password) {
             var res = {
               code: 200,
               message: 'success'
@@ -113,7 +113,7 @@ module.exports = function (Account) {
             cb(null, res);
           }
         });
-        
+
       }
       else {
         var res = {
@@ -130,13 +130,13 @@ module.exports = function (Account) {
     Account.count({ PhoneNumber: user.PhoneNumber }, function (err, count) {
       console.info(count);
       if (count == 1) {
-        Account.updateAll({ PhoneNumber: user.PhoneNumber }, {Password: user.Password}, function (err, instance) {
+        Account.updateAll({ PhoneNumber: user.PhoneNumber }, { Password: user.Password }, function (err, instance) {
           var res = {
             code: 200,
             message: 'success'
           };
           cb(null, res);
-        });   
+        });
       }
       else {
         var res = {
@@ -201,7 +201,7 @@ module.exports = function (Account) {
     });
 
   };
-
+  
 
   //dataSource.connector.execute（sql_stmt，params，callback）;
   Account.remoteMethod('loginNoPd',
@@ -210,19 +210,19 @@ module.exports = function (Account) {
       accepts: { arg: 'phone', type: 'string', required: true, http: { source: 'query' } },
       returns: { arg: 'response', type: 'object' }
     });
-    Account.remoteMethod('loginByPd',
+  Account.remoteMethod('loginByPd',
     {
       http: { path: '/loginByPd', verb: 'post' },
       accepts: { arg: 'user', type: 'object', required: true, http: { source: 'body' } },
       returns: { arg: 'response', type: 'object' }
     });
-    Account.remoteMethod('changePd',
+  Account.remoteMethod('changePd',
     {
       http: { path: '/changePd', verb: 'post' },
       accepts: { arg: 'user', type: 'object', required: true, http: { source: 'body' } },
       returns: { arg: 'response', type: 'object' }
     });
-    Account.remoteMethod('register',
+  Account.remoteMethod('register',
     {
       http: { path: '/register', verb: 'post' },
       accepts: { arg: 'user', type: 'object', required: true, http: { source: 'body' } },

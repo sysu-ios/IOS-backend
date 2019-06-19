@@ -267,3 +267,217 @@ http://localhost:3000/api/account/updateUser
 }
 ```
 
+## 关注
+
+- 关注`post`
+
+```
+http://localhost:3000/api/subscribe
+```
+
+参数：
+
+```json
+{
+  "first": "17620124723",
+  "second": "17620124724"
+}
+```
+
+返回：
+
+```json
+{
+  "first": "string",
+  "second": "string"
+}
+```
+
+- 取消关注`post`
+
+```
+http://localhost:3000/api/subscribe/delete
+```
+
+参数：
+
+```json
+{
+  "first": "string",
+  "second": "string"
+}
+```
+
+返回：
+
+```json
+//成功
+{
+  "response": {
+    "code": 201,
+    "message": "success"
+  }
+}
+```
+
+- 获取关注列表`get`
+
+```
+http://localhost:3000/api/subscribe
+```
+
+返回：
+
+```json
+[
+  {
+    "id": 2,
+    "first": "17620124723",
+    "second": "17620124725"
+  },
+  {
+    "id": 3,
+    "first": "17620124724",
+    "second": "17620124725"
+  },
+  {
+    "id": 4,
+    "first": "string",
+    "second": "string"
+  }
+]
+```
+
+## 文章
+
+#### 发布文章
+
+`post`
+
+```
+http://localhost:3000/api/news/post
+```
+
+参数：
+
+```json
+{
+  "Content": "string",
+  "Picture": "string",
+  "PhoneNumber": "17620124724"
+}
+```
+
+返回：
+
+```json
+{
+  "response": {
+    "code": 201,
+    "message": "success"
+  }
+}
+```
+
+#### 删除文章
+
+`get`
+
+```
+http://localhost:3000/api/news/delete
+```
+
+参数：
+
+```
+id: 0
+```
+
+返回：
+
+```json
+//成功
+{
+  "response": {
+    "code": 200,
+    "message": "success"
+  }
+}
+//失败
+{
+  "response": {
+    "code": 200,
+    "message": "fail",
+    "error": "no subscribe"
+  }
+}
+```
+
+
+
+#### 请求关注用户的文章
+
+`get`
+
+```
+http://localhost:3000/api/news/getRecommend
+```
+
+参数
+
+```json
+string: 17620124724
+```
+
+返回：
+
+```json
+//成功
+{
+  "response": {
+    "code": 200,
+    "message": "success",
+    "data": [
+      {
+        "id": 3,
+        "Content": "string",
+        "Picture": "string",
+        "PhoneNumber": "17620124725",
+        "PraiseNum": 0,
+        "CommentNum": 0,
+        "createdAt": "2019-06-19T06:12:56.534Z",
+        "lastModifiedAt": "2019-06-19T06:12:56.534Z"
+      },
+      {
+        "id": 4,
+        "Content": "string",
+        "Picture": "string",
+        "PhoneNumber": "17620124725",
+        "PraiseNum": 0,
+        "CommentNum": 0,
+        "createdAt": "2019-06-19T06:21:47.042Z",
+        "lastModifiedAt": "2019-06-19T06:21:47.042Z"
+      }
+    ]
+  }
+}
+//失败
+//无订阅
+{
+  "response": {
+    "code": 200,
+    "message": "fail",
+    "error": "no subscribe"
+  }
+}
+//无新闻
+{
+  "response": {
+    "code": 200,
+    "message": "fail",
+    "error": "no news"
+  }
+}
+```
+
+## 评论

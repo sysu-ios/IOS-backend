@@ -12,5 +12,11 @@
     "name": "ios",
     "user": "postgres",
     "connector": "postgresql"
+  },
+  "picture": {
+    "name": "picture",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./server/storage"
   }
 }
