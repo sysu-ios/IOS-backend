@@ -1,10 +1,12 @@
 # Feeds流后端API
 
-API: http://localhost:3000/explorer
+`API`: http://localhost:3000/explorer
 
-url: http://localhost:3000
+`url`: http://localhost:3000
 
-ip: 172.18.32.213
+`ip`: 172.18.32.213
+
+使用时将IP地址替换`localhost`
 
 ## 状态码
 
@@ -231,7 +233,7 @@ http://localhost:3000/api/account/updateUser
 {
 "PhoneNumber": "17620124726",
 "UserName": "test",
-"UserIcon": "",
+"UserIcon": "base64 string",
 "Introduction": "String",
 "Sex": "String",
 "Birthday": "String",
@@ -456,6 +458,10 @@ id: 0
 http://localhost:3000/api/StorageFile/upload
 ```
 
+图片`html`测试
+
+http://localhost:3000
+
 参数：
 
 ```
@@ -532,6 +538,7 @@ string: 17620124724
       {
         "id": 2,
         "UserName": "test1",
+        "UserIcon": "",
         "Content": "string",
         "Picture": [
           "string",
@@ -546,6 +553,7 @@ string: 17620124724
       {
         "id": 3,
         "UserName": "test1",
+        "UserIcon": "",
         "Content": "string",
         "Picture": [
           "string",
@@ -560,6 +568,7 @@ string: 17620124724
       {
         "id": 4,
         "UserName": "test",
+        "UserIcon": "",
         "Content": "string",
         "Picture": [
           "string",
@@ -594,19 +603,16 @@ string: 17620124724
 
 ```
 
-#### 请求具体文章`get`
-
-文章作者和`id`由文章列表传入
+#### 请求自己发布的文章`get`
 
 ```
-http://localhost:3000/api/news/getNewsById
+http://localhost:3000/api/news/getMyNewsList
 ```
 
 参数：
 
 ```json
-id: 3
-UserName: "test"
+phone："17620124723"
 ```
 
 返回：
@@ -617,24 +623,34 @@ UserName: "test"
   "response": {
     "code": 200,
     "message": "success",
-    "data": {
-      "id": 3,
-      "UserName": "test",
-      "Content": "string",
-      "Picture": [
-        "string",
-        "string",
-        "string"
-      ],
-      "createdAt": "2019-06-19T16:07:53.321Z",
-      "CommentNum": 0,
-      "ShareNum": 0,
-      "PraiseNum": 0
-    }
+    "data": [
+      {
+        "id": 1,
+        "UserName": "test",
+        "UserIcon": "base64",
+        "Content": "",
+        "Picture": [
+       "/api/containers/common/download/snipaste_2019-06-04_14-18-031560957756108.png"
+        ],
+        "createdAt": "2019-06-19T15:52:07.390Z",
+        "CommentNum": 3,
+        "ShareNum": 2,
+        "PraiseNum": 2
+      }
+    ]
   }
 }
 
 //失败
+//无用户
+{
+  "response": {
+    "code": 200,
+    "message": "fail",
+    "error": "no account"
+  }
+}
+//无发布
 {
   "response": {
     "code": 200,
@@ -645,3 +661,4 @@ UserName: "test"
 ```
 
 ## 评论
+

@@ -93,10 +93,12 @@ module.exports = function (News) {
                                 var objs = [];
                                 instance2.forEach(function (item) {
                                     var UserName = '';
+                                    var UserIcon = '';
                                     console.info(item.PhoneNumber);
                                     for (var i = 0; i < instance1.length; i++) {
                                         if (instance1[i].PhoneNumber == item.PhoneNumber) {
                                             UserName = instance1[i].UserName;
+                                            UserIcon = instance1[i].UserIcon;
                                             break;
                                         }
                                     }
@@ -104,6 +106,7 @@ module.exports = function (News) {
                                     objs.push({
                                         id: item.id,
                                         UserName: UserName,
+                                        UserIcon: UserIcon,
                                         Content: item.Content,
                                         Picture: item.Picture,
                                         createdAt: item.createdAt,
@@ -129,36 +132,67 @@ module.exports = function (News) {
         });
 
     };
-    News.getNewsById = function(id,UserName, cb) {
-        News.findOne({ where: { id: id } }, function (err, instance) {
-            if (instance == null) {
+    News.getMyNewsList = function (phone, cb) {
+        console.info(phone);
+        var Account = app.models.Account;
+        Account.find({ where: { PhoneNumber: phone } }, function (err, instance1) {
+            if (instance1.length == 0) {
                 var res = {
                     code: 200,
                     message: 'fail',
-                    error: 'no news'
+                    error: 'no account'
                 };
                 cb(null, res);
             }
+
             else {
-                var objs={
-                    id: instance.id,
-                    UserName: UserName,
-                    Content: instance.Content,
-                    Picture: instance.Picture,
-                    createdAt: instance.createdAt,
-                    CommentNum: instance.CommentNum,
-                    ShareNum: instance.ShareNum,
-                    PraiseNum: instance.PraiseNum
-                };
-                var res = {
-                    code: 200,
-                    message: 'success',
-                    data: objs
-                };
-                cb(null, res);
+                News.find({ where: { PhoneNumber: phone } }, function (err, instance2) {
+                    if (instance2.length == 0) {
+                        var res = {
+                            code: 200,
+                            message: 'fail',
+                            error: 'no news'
+                        };
+                        cb(null, res);
+                    }
+                    else {
+                        var objs = [];
+                        instance2.forEach(function (item) {
+                            var UserName = '';
+                            var UserIcon = '';
+                            console.info(item.PhoneNumber);
+                            for (var i = 0; i < instance1.length; i++) {
+                                if (instance1[i].PhoneNumber == item.PhoneNumber) {
+                                    UserName = instance1[i].UserName;
+                                    UserIcon = instance1[i].UserIcon;
+                                    break;
+                                }
+                            }
+                            console.info(UserName);
+                            objs.push({
+                                id: item.id,
+                                UserName: UserName,
+                                UserIcon: UserIcon,
+                                Content: item.Content,
+                                Picture: item.Picture,
+                                createdAt: item.createdAt,
+                                CommentNum: item.CommentNum,
+                                ShareNum: item.ShareNum,
+                                PraiseNum: item.PraiseNum
+                            });
+                        });
+                        var res = {
+                            code: 200,
+                            message: 'success',
+                            data: objs
+                        };
+                        cb(null, res);
+                    }
+                });
             }
         });
-    }
+
+    };
 
     News.remoteMethod('post',
         {
@@ -169,15 +203,13 @@ module.exports = function (News) {
     News.remoteMethod('getRecommendList',
         {
             http: { path: '/getRecommendList', verb: 'get' },
-            accepts: {arg: 'phone', type: 'string', required: true, http: { source: 'query' } },
+            accepts: { arg: 'phone', type: 'string', required: true, http: { source: 'query' } },
             returns: { arg: 'response', type: 'object' }
         });
-    News.remoteMethod('getNewsById',
+    News.remoteMethod('getMyNewsList',
         {
-            http: { path: '/getNewsById', verb: 'get' },
-            accepts: 
-            [{ arg: 'id', type: 'number', required: true, http: { source: 'query' } },
-            { arg: 'UserName', type: 'string', required: true, http: { source: 'query' } }],
+            http: { path: '/getMyNewsList', verb: 'get' },
+            accepts: { arg: 'phone', type: 'string', required: true, http: { source: 'query' } },
             returns: { arg: 'response', type: 'object' }
         });
     News.remoteMethod('delete',
