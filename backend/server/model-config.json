@@ -58,5 +58,17 @@
   "StorageFile": {
     "dataSource": "ios",
     "public": true
+  },
+  "Comment": {
+    "dataSource": "ios",
+    "public": true
+  },
+  "Reply": {
+    "dataSource": "ios",
+    "public": true
+  },
+  "Praise": {
+    "dataSource": "ios",
+    "public": true
   }
 }

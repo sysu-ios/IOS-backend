@@ -1,0 +1,34 @@
+{
+    "name": "Praise",
+    "plural": "praise",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "properties": {
+      "id": {
+        "type": "number"
+      },
+      "ArticleId": {
+        "type": "number"
+      },
+      "CommentId": {
+        "type": "number"
+      },
+      "UserPhone": {
+        "type": "String"
+      },
+      "createdAt": {
+        "type": "date"
+      },
+      "lastModifiedAt": {
+        "type": "date"
+      }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+  }
+  

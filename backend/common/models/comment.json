@@ -13,6 +13,9 @@
     "ArticleId": {
       "type": "number"
     },
+    "UserPhone": {
+      "type": "String"
+    },
     "Content": {
       "type": "String"
     },
