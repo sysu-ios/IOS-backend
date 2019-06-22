@@ -19,7 +19,7 @@
       "Content": {
         "type": "String"
       },
-      "PraiseNum": {
+      "ReplyNum": {
         "type": "Number",
         "default": 0
       },

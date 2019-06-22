@@ -662,3 +662,21 @@ phone："17620124723"
 
 ## 评论
 
+#### 对文章发表评论`post`
+
+```
+http://localhost:3000/api/comment/post
+```
+
+参数：
+
+```
+{
+  "ArticleId": 1,
+  "UserPhone": "17620124723",
+  "Content": "string"
+}
+```
+
+返回：
+

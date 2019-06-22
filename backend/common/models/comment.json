@@ -23,7 +23,7 @@
       "type": "Number",
       "default": 0
     },
-    "CommentNum": {
+    "ReplyNum": {
       "type": "Number",
       "default": 0
     },

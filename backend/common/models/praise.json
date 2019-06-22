@@ -11,10 +11,12 @@
         "type": "number"
       },
       "ArticleId": {
-        "type": "number"
+        "type": "number",
+        "default": 0
       },
       "CommentId": {
-        "type": "number"
+        "type": "number",
+        "default": 0
       },
       "UserPhone": {
         "type": "String"

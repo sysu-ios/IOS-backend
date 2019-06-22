@@ -13,7 +13,23 @@ module.exports = function (Comment) {
         }
         next();
     });
-
+    //对文章发表评论
+    Comment.post = function (data, cb) {
+        console.info(data.PhoneNumber);
+        Comment.create(data, function (err, instance) {
+            var res = {
+                code: 201,
+                message: 'success',
+                CommentId: instance.id
+            };
+            console.info(instance);
+            cb(null, res);
+        });
+    };
+    //获取某个文章的全部评论（不包含回复）
+    Comment.getCommentList = function (ArticleId, cb) {
+        Comment.find
+    };
 
     Comment.remoteMethod('post',
         {
