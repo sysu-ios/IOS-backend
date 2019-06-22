@@ -38,17 +38,20 @@
       "type": "String"
     },
     "PostNum": {
-      "type": "Number"
+      "type": "Number",
+      "default": 0
     },
     "PraiseNum": {
-      "type": "Number"
+      "type": "Number",
+      "default": 0
     },
     "AttentionNum": {
       "type": "Number",
       "default": 0
     },
     "FanNum": {
-      "type": "Number"
+      "type": "Number",
+      "default": 0
     },
     "createdAt": {
       "type": "date"

@@ -8,6 +8,27 @@
 
 使用时将IP地址替换`localhost`
 
+## 时间日期
+
+```
+var myDate = new Date();  
+myDate.getYear(); *//获取当前年份(2位)*  
+myDate.getFullYear(); *//获取完整的年份(4位,1970-????)*  
+myDate.getMonth(); *//获取当前月份(0-11,0代表1月)         // 所以获取当前月份是myDate.getMonth()+1;*   
+myDate.getDate(); *//获取当前日(1-31)*  
+myDate.getDay(); *//获取当前星期X(0-6,0代表星期天)*  
+myDate.getTime(); *//获取当前时间(从1970.1.1开始的毫秒数)*  
+myDate.getHours(); *//获取当前小时数(0-23)*  
+myDate.getMinutes(); *//获取当前分钟数(0-59)*  
+myDate.getSeconds(); *//获取当前秒数(0-59)*  
+myDate.getMilliseconds(); *//获取当前毫秒数(0-999)*  
+myDate.toLocaleDateString(); *//获取当前日期*  
+var mytime=myDate.toLocaleTimeString(); *//获取当前时间*  
+myDate.toLocaleString( ); *//获取日期与时间*  
+```
+
+
+
 ## 状态码
 
 - 200 OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）。
@@ -202,10 +223,10 @@ phone: "17620124723"
       "Sex": null,
       "Birthday": null,
       "Region": null,
-      "PostNum": null,
-      "PraiseNum": null,
-      "AttentionNum": null,
-      "FanNum": null,
+      "PostNum": 0,
+      "PraiseNum": 0,
+      "AttentionNum": 0,
+      "FanNum": 0,
       "createdAt": "2019-06-16T15:34:30.341Z",
       "lastModifiedAt": "2019-06-16T15:34:30.341Z"
     }
@@ -523,7 +544,7 @@ http://localhost:3000/api/news/getRecommendList
 参数：
 
 ```json
-string: 17620124724
+phone: "17620124724"
 ```
 
 返回：

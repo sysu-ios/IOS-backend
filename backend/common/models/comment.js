@@ -15,7 +15,6 @@ module.exports = function (Comment) {
     });
     //对文章发表评论
     Comment.post = function (data, cb) {
-        console.info(data.PhoneNumber);
         Comment.create(data, function (err, instance) {
             var res = {
                 code: 201,
@@ -28,7 +27,63 @@ module.exports = function (Comment) {
     };
     //获取某个文章的全部评论（不包含回复）
     Comment.getCommentList = function (ArticleId, cb) {
-        Comment.find
+        Comment.find({ where: { ArticleId: ArticleId } }, function (err, instance) {
+            if (instance.length == 0) {
+                var res = {
+                    code: 200,
+                    message: 'warning',
+                    error: 'no comment'
+                };
+                cb(null, res);
+            }
+            else {
+                var res = {
+                    code: 200,
+                    message: 'success',
+                    data: instance
+                };
+                cb(null, res);
+            }
+        });
+    };
+    //获取用户发表的评论
+    Comment.getMyCommentList = function (phone, cb) {
+        Comment.find({ where: { UserPhone: phone } }, function (err, instance) {
+            if (instance.length == 0) {
+                var res = {
+                    code: 200,
+                    message: 'warning',
+                    error: 'no comment'
+                };
+                cb(null, res);
+            }
+            else {
+                var res = {
+                    code: 200,
+                    message: 'success',
+                    data: instance
+                };
+                cb(null, res);
+            }
+        });
+    };
+    //删除某个评论
+    Comment.delete = function(id, cb) {
+        Comment.destroyAll({ id: id }, function (err, info) {
+
+            if (err) {
+                return cb(null, {
+                    code: 200,
+                    message: 'fail',
+                    error: err.message
+                });
+            }
+            cb(null, {
+                code: 200,
+                message: 'success',
+                error: info.count
+            });
+          });
     };
 
     Comment.remoteMethod('post',
