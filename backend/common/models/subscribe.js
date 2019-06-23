@@ -40,7 +40,7 @@ module.exports = function (Subscribe) {
     };
     Subscribe.remoteMethod('delete',
         {
-            http: { path: '/delete', verb: 'post' },
+            http: { path: '/delete', verb: 'delete' },
             accepts: { arg: 'data', type: 'object', required: true, http: { source: 'body' } },
             returns: { arg: 'response', type: 'object' }
         });

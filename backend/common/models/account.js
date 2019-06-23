@@ -250,7 +250,7 @@ module.exports = function (Account) {
     });
   Account.remoteMethod('updateUser',
     {
-      http: { path: '/updateUser', verb: 'post' },
+      http: { path: '/updateUser', verb: 'patch' },
       accepts: { arg: 'user', type: 'object', required: true, "description": "用户模型", http: { source: 'body' } },
       returns: { arg: 'response', type: 'object' }
     });

@@ -242,7 +242,7 @@ phone: "17620124723"
 }
 ```
 
-#### 更新详细信息`post`
+#### 更新详细信息`patch`
 
 ```
 http://localhost:3000/api/account/updateUser
@@ -251,6 +251,7 @@ http://localhost:3000/api/account/updateUser
 参数：
 
 ```js
+//参数可选
 {
 "PhoneNumber": "17620124726",
 "UserName": "test",
@@ -308,7 +309,7 @@ http://localhost:3000/api/subscribe
 }
 ```
 
-#### 取消关注`post`
+#### 取消关注`delete`
 
 ```
 http://localhost:3000/api/subscribe/delete
@@ -441,7 +442,7 @@ http://localhost:3000/api/news/post
 }
 ```
 
-#### 删除文章`get`
+#### 删除文章`delete`
 
 ```
 http://localhost:3000/api/news/delete
@@ -691,7 +692,7 @@ http://localhost:3000/api/comment/post
 
 参数：
 
-```
+```json
 {
   "ArticleId": 1,
   "UserPhone": "17620124723",
@@ -700,4 +701,537 @@ http://localhost:3000/api/comment/post
 ```
 
 返回：
+
+```json
+//成功
+{
+  "response": {
+    "code": 201,
+    "message": "success",
+    "CommentId": 6
+  }
+}
+```
+
+#### 获取某个文章的全部评论（不包含回复）`get`
+
+```
+http://localhost:3000/api/comment/getCommentList
+```
+
+参数：
+
+```
+ArticleId: 1
+```
+
+返回：
+
+```json
+//成功
+{
+  "response": {
+    "code": 200,
+    "message": "success",
+    "data": [
+      {
+        "id": 3,
+        "ArticleId": 1,
+        "UserPhone": "17620124723",
+        "Content": "string",
+        "PraiseNum": 0,
+        "ReplyNum": 0,
+        "createdAt": "2019-06-22T08:02:24.626Z",
+        "lastModifiedAt": "2019-06-22T08:02:24.626Z"
+      },
+      {
+        "id": 4,
+        "ArticleId": 1,
+        "UserPhone": "17620124723",
+        "Content": "string",
+        "PraiseNum": 0,
+        "ReplyNum": 0,
+        "createdAt": "2019-06-22T08:53:55.708Z",
+        "lastModifiedAt": "2019-06-22T08:53:55.708Z"
+      },
+      {
+        "id": 5,
+        "ArticleId": 1,
+        "UserPhone": "17620124723",
+        "Content": "string",
+        "PraiseNum": 0,
+        "ReplyNum": 0,
+        "createdAt": "2019-06-22T08:56:52.868Z",
+        "lastModifiedAt": "2019-06-22T08:56:52.868Z"
+      },
+      {
+        "id": 6,
+        "ArticleId": 1,
+        "UserPhone": "17620124723",
+        "Content": "string",
+        "PraiseNum": 0,
+        "ReplyNum": 0,
+        "createdAt": "2019-06-23T14:00:44.758Z",
+        "lastModifiedAt": "2019-06-23T14:00:44.758Z"
+      }
+    ]
+  }
+}
+//失败
+{
+  "response": {
+    "code": 200,
+    "message": "warning",
+    "error": "no comment"
+  }
+}
+```
+
+#### 获取用户发表的评论`get`
+
+```
+http://localhost:3000/api/comment/getMyCommentList
+```
+
+参数：
+
+```
+phone：17620124723
+```
+
+返回：
+
+```json
+//成功
+{
+  "response": {
+    "code": 200,
+    "message": "success",
+    "data": [
+      {
+        "id": 3,
+        "ArticleId": 1,
+        "UserPhone": "17620124723",
+        "Content": "string",
+        "PraiseNum": 0,
+        "ReplyNum": 0,
+        "createdAt": "2019-06-22T08:02:24.626Z",
+        "lastModifiedAt": "2019-06-22T08:02:24.626Z"
+      },
+      {
+        "id": 4,
+        "ArticleId": 1,
+        "UserPhone": "17620124723",
+        "Content": "string",
+        "PraiseNum": 0,
+        "ReplyNum": 0,
+        "createdAt": "2019-06-22T08:53:55.708Z",
+        "lastModifiedAt": "2019-06-22T08:53:55.708Z"
+      },
+      {
+        "id": 5,
+        "ArticleId": 1,
+        "UserPhone": "17620124723",
+        "Content": "string",
+        "PraiseNum": 0,
+        "ReplyNum": 0,
+        "createdAt": "2019-06-22T08:56:52.868Z",
+        "lastModifiedAt": "2019-06-22T08:56:52.868Z"
+      },
+      {
+        "id": 6,
+        "ArticleId": 1,
+        "UserPhone": "17620124723",
+        "Content": "string",
+        "PraiseNum": 0,
+        "ReplyNum": 0,
+        "createdAt": "2019-06-23T14:00:44.758Z",
+        "lastModifiedAt": "2019-06-23T14:00:44.758Z"
+      }
+    ]
+  }
+}
+//失败
+{
+  "response": {
+    "code": 200,
+    "message": "warning",
+    "error": "no comment"
+  }
+}
+```
+
+#### 删除某个评论`delete`
+
+```
+http://localhost:3000/api/comment/delete
+```
+
+参数：
+
+```
+id: 2
+```
+
+返回:
+
+```json
+//成功
+//count 表示删除的项目数
+{
+  "response": {
+    "code": 200,
+    "message": "success",
+    "count": 0
+  }
+}
+```
+
+## 回复
+
+#### 回复评论`post`
+
+```
+http://localhost:3000/api/reply/post
+```
+
+参数：
+
+```json
+{
+  "CommentId": 1,
+  "UserPhone": "17620124723",
+  "Content": "string"
+}
+```
+
+返回：
+
+```json
+{
+  "response": {
+    "code": 201,
+    "message": "success",
+    "ReplyId": 2
+  }
+}
+```
+
+#### 获取某个评论的全部回复`get`
+
+```
+http://localhost:3000/api/reply/getReplyList
+```
+
+参数：
+
+```
+CommentId：1
+```
+
+返回：
+
+```json
+//成功
+{
+  "response": {
+    "code": 200,
+    "message": "success",
+    "data": [
+      {
+        "id": 1,
+        "CommentId": 1,
+        "UserPhone": "17620124723",
+        "Content": "",
+        "ReplyNum": 0,
+        "createdAt": "2019-06-22T07:54:59.676Z",
+        "lastModifiedAt": "2019-06-22T07:54:59.676Z"
+      },
+      {
+        "id": 2,
+        "CommentId": 1,
+        "UserPhone": "17620124723",
+        "Content": "string",
+        "ReplyNum": 0,
+        "createdAt": "2019-06-23T15:14:28.311Z",
+        "lastModifiedAt": "2019-06-23T15:14:28.311Z"
+      }
+    ]
+  }
+}
+//失败
+{
+  "response": {
+    "code": 200,
+    "message": "warning",
+    "error": "no Reply"
+  }
+}
+```
+
+#### 获取用户发表的回复`get`
+
+```
+http://localhost:3000/api/reply/getMyReplyList
+```
+
+参数：
+
+```
+phone：17620124723
+```
+
+返回：
+
+```json
+//成功
+{
+  "response": {
+    "code": 200,
+    "message": "success",
+    "data": [
+      {
+        "id": 1,
+        "CommentId": 1,
+        "UserPhone": "17620124723",
+        "Content": "",
+        "ReplyNum": 0,
+        "createdAt": "2019-06-22T07:54:59.676Z",
+        "lastModifiedAt": "2019-06-22T07:54:59.676Z"
+      },
+      {
+        "id": 2,
+        "CommentId": 1,
+        "UserPhone": "17620124723",
+        "Content": "string",
+        "ReplyNum": 0,
+        "createdAt": "2019-06-23T15:14:28.311Z",
+        "lastModifiedAt": "2019-06-23T15:14:28.311Z"
+      }
+    ]
+  }
+}
+//失败
+{
+  "response": {
+    "code": 200,
+    "message": "warning",
+    "error": "no Reply"
+  }
+}
+```
+
+#### 删除某个回复`delete`
+
+```
+http://localhost:3000/api/reply/delete
+```
+
+参数：
+
+```
+id：2
+```
+
+返回：
+
+```json
+//count 表示删除的项目数
+{
+  "response": {
+    "code": 200,
+    "message": "success",
+    "count": 1
+  }
+}
+```
+
+## 点赞
+
+#### 对评论或文章点赞`post`
+
+```
+http://localhost:3000/api/praise/post
+```
+
+参数：
+
+```json
+//对文章点赞 设置评论id为0
+{
+  "ArticleId": 1,
+  "CommentId": 0,
+  "UserPhone": "17620124723"
+}
+//对评论点赞 设置文章id为0
+{
+  "ArticleId": 0,
+  "CommentId": 1,
+  "UserPhone": "17620124723"
+}
+```
+
+返回：
+
+```json
+{
+  "response": {
+    "code": 201,
+    "message": "success",
+    "PraiseId": 3
+  }
+}
+```
+
+#### 获取某个文章或评论的全部点赞`post`
+
+```
+http://localhost:3000/api/praise/getPraiseList
+```
+
+参数：
+
+```json
+//获取评论的点赞
+{
+  "ArticleId": 0,
+  "CommentId": 1
+}
+//获取文章点赞
+{
+  "ArticleId": 1,
+  "CommentId": 0
+}
+```
+
+返回：
+
+```json
+//成功
+//获取评论的点赞
+{
+  "response": {
+    "code": 200,
+    "message": "success",
+    "data": [
+      {
+        "id": 1,
+        "ArticleId": 0,
+        "CommentId": 1,
+        "UserPhone": "17620124723",
+        "createdAt": "2019-06-22T07:55:18.423Z",
+        "lastModifiedAt": "2019-06-22T07:55:18.423Z"
+      },
+      {
+        "id": 3,
+        "ArticleId": 0,
+        "CommentId": 1,
+        "UserPhone": "17620124723",
+        "createdAt": "2019-06-23T15:26:33.824Z",
+        "lastModifiedAt": "2019-06-23T15:26:33.824Z"
+      }
+    ]
+  }
+}
+//获取文章点赞
+{
+  "response": {
+    "code": 200,
+    "message": "success",
+    "data": [
+      {
+        "id": 2,
+        "ArticleId": 1,
+        "CommentId": 0,
+        "UserPhone": "string",
+        "createdAt": "2019-06-23T15:24:45.461Z",
+        "lastModifiedAt": "2019-06-23T15:24:45.461Z"
+      }
+    ]
+  }
+}
+//失败
+{
+  "response": {
+    "code": 200,
+    "message": "warning",
+    "error": "no Praise"
+  }
+}
+```
+
+#### 获取我的点赞`get`
+
+```
+http://localhost:3000/api/praise/getMyPraiseList
+```
+
+参数：
+
+```
+phone：17620124723
+```
+
+返回：
+
+```json
+//成功
+{
+  "response": {
+    "code": 200,
+    "message": "success",
+    "data": [
+      {
+        "id": 1,
+        "ArticleId": 0,
+        "CommentId": 1,
+        "UserPhone": "17620124723",
+        "createdAt": "2019-06-22T07:55:18.423Z",
+        "lastModifiedAt": "2019-06-22T07:55:18.423Z"
+      },
+      {
+        "id": 3,
+        "ArticleId": 0,
+        "CommentId": 1,
+        "UserPhone": "17620124723",
+        "createdAt": "2019-06-23T15:26:33.824Z",
+        "lastModifiedAt": "2019-06-23T15:26:33.824Z"
+      }
+    ]
+  }
+}
+//失败
+{
+  "response": {
+    "code": 200,
+    "message": "warning",
+    "error": "no Praise"
+  }
+}
+```
+
+#### 取消点赞`delete`
+
+```
+http://localhost:3000/api/praise/delete
+```
+
+参数：
+
+```
+id：1
+```
+
+返回：
+
+```json
+//count 表示删除的项目数
+{
+  "response": {
+    "code": 200,
+    "message": "success",
+    "count": 1
+  }
+}
+```
 

@@ -81,7 +81,7 @@ module.exports = function (Reply) {
             cb(null, {
                 code: 200,
                 message: 'success',
-                error: info.count
+                count: info.count
             });
           });
     };
@@ -106,7 +106,7 @@ module.exports = function (Reply) {
         });
     Reply.remoteMethod('delete',
         {
-            http: { path: '/delete', verb: 'get' },
+            http: { path: '/delete', verb: 'delete' },
             accepts: { arg: 'id', type: 'number', required: true, http: { source: 'query' } },
             returns: { arg: 'response', type: 'object' }
         });
