@@ -72,7 +72,25 @@ phone: "17620124723"
 {
   "response": {
     "code": 200,
-    "message": "success"
+    "message": "success",
+    "data": {
+      "id": 2,
+      "PhoneNumber": "17620124723",
+      "UserName": "test1",
+      "Password": "test1",
+      "UserIcon": "",
+      "Email": "1299927852@qq.com",
+      "Introduction": "test1",
+      "Sex": "man",
+      "Birthday": "1997-08-07",
+      "Region": "guangdong",
+      "PostNum": 1,
+      "PraiseNum": 2,
+      "AttentionNum": 0,
+      "FanNum": 4,
+      "createdAt": "2019-06-23T16:28:25.922Z",
+      "lastModifiedAt": "2019-06-23T16:28:25.922Z"
+    }
   }
 }
 //失败
@@ -107,7 +125,25 @@ http://localhost:3000/api/account/loginByPd
 {
   "response": {
     "code": 200,
-    "message": "success"
+    "message": "success",
+    "data": {
+      "id": 2,
+      "PhoneNumber": "17620124723",
+      "UserName": "test1",
+      "Password": "test1",
+      "UserIcon": "",
+      "Email": "1299927852@qq.com",
+      "Introduction": "test1",
+      "Sex": "man",
+      "Birthday": "1997-08-07",
+      "Region": "guangdong",
+      "PostNum": 1,
+      "PraiseNum": 2,
+      "AttentionNum": 0,
+      "FanNum": 4,
+      "createdAt": "2019-06-23T16:28:25.922Z",
+      "lastModifiedAt": "2019-06-23T16:28:25.922Z"
+    }
   }
 }
 //失败
@@ -116,6 +152,14 @@ http://localhost:3000/api/account/loginByPd
     "code": 200,
     "message": "fail",
     "error": "no account"
+  }
+}
+
+{
+  "response": {
+    "code": 200,
+    "message": "fail",
+    "error": "password is incorrect"
   }
 }
 ```
@@ -255,7 +299,7 @@ http://localhost:3000/api/account/updateUser
 {
 "PhoneNumber": "17620124726",
 "UserName": "test",
-"UserIcon": "base64 string",
+"UserIcon": "url string",
 "Introduction": "String",
 "Sex": "String",
 "Birthday": "String",

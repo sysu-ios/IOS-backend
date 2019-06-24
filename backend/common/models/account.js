@@ -72,16 +72,8 @@ module.exports = function (Account) {
     });
   };
   Account.loginNoPd = function (phone, cb) {
-    Account.count({ PhoneNumber: phone }, function (err, count) {
-      console.info(count);
-      if (count == 1) {
-        var res = {
-          code: 200,
-          message: 'success'
-        };
-        cb(null, res);
-      }
-      else {
+    Account.findOne({ where: { PhoneNumber: phone } }, function (err, instance) {
+      if (instance == null) {
         var res = {
           code: 200,
           message: 'fail',
@@ -89,34 +81,22 @@ module.exports = function (Account) {
         };
         cb(null, res);
       }
+      else {
+        var res = {
+          code: 200,
+          message: 'success',
+          data: instance
+        };
+        cb(null, res);
+      }
     });
+    
   };
   Account.loginByPd = function (user, cb) {
     console.info(user);
     console.info(user.PhoneNumber);
-    Account.count({ PhoneNumber: user.PhoneNumber }, function (err, count) {
-      console.info(count);
-      if (count == 1) {
-        Account.findOne({ where: { PhoneNumber: user.PhoneNumber } }, function (err, instance) {
-          if (instance.Password == user.Password) {
-            var res = {
-              code: 200,
-              message: 'success'
-            };
-            cb(null, res);
-          }
-          else {
-            var res = {
-              code: 200,
-              message: 'fail',
-              error: 'password is incorrect'
-            };
-            cb(null, res);
-          }
-        });
-
-      }
-      else {
+    Account.findOne({ where: { PhoneNumber: user.PhoneNumber } }, function (err, instance) {
+      if (instance == null) {
         var res = {
           code: 200,
           message: 'fail',
@@ -124,7 +104,27 @@ module.exports = function (Account) {
         };
         cb(null, res);
       }
+      else {
+        if (instance.Password == user.Password) {
+          var res = {
+            code: 200,
+            message: 'success',
+            data: instance
+          };
+          cb(null, res);
+        }
+        else {
+          var res = {
+            code: 200,
+            message: 'fail',
+            error: 'password is incorrect'
+          };
+          cb(null, res);
+        }
+      }
+      
     });
+    
   };
   Account.changePd = function (user, cb) {
     console.info(user);
