@@ -186,7 +186,25 @@ http://localhost:3000/api/account/changePd
 {
   "response": {
     "code": 200,
-    "message": "success"
+    "message": "success",
+    "data": {
+      "id": 2,
+      "PhoneNumber": "17620124723",
+      "UserName": "test1",
+      "Password": "test3",
+      "UserIcon": "",
+      "Email": "1299927852@qq.com",
+      "Introduction": "test1",
+      "Sex": "man",
+      "Birthday": "1997-08-07",
+      "Region": "guangdong",
+      "PostNum": 1,
+      "PraiseNum": 2,
+      "AttentionNum": 0,
+      "FanNum": 4,
+      "createdAt": "2019-06-24T05:29:27.289Z",
+      "lastModifiedAt": "2019-06-24T06:25:13.672Z"
+    }
   }
 }
 //失败

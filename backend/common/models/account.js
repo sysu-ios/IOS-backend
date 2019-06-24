@@ -127,25 +127,24 @@ module.exports = function (Account) {
     
   };
   Account.changePd = function (user, cb) {
-    console.info(user);
-    Account.count({ PhoneNumber: user.PhoneNumber }, function (err, count) {
-      console.info(count);
-      if (count == 1) {
-        Account.updateAll({ PhoneNumber: user.PhoneNumber }, { Password: user.Password }, function (err, instance) {
-          var res = {
-            code: 200,
-            message: 'success'
-          };
-          cb(null, res);
-        });
-      }
-      else {
+    Account.findOne({ where: { PhoneNumber: user.PhoneNumber } }, function (err, instance) {
+      if (instance == null) {
         var res = {
           code: 200,
           message: 'fail',
           error: 'no account'
         };
         cb(null, res);
+      }
+      else {
+        Account.updateAll({ PhoneNumber: user.PhoneNumber }, { Password: user.Password }, function (err, instance1) {
+          var res = {
+            code: 200,
+            message: 'success',
+            data: instance
+          };
+          cb(null, res);
+        });
       }
     });
   };
