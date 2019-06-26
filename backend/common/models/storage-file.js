@@ -4,6 +4,7 @@ var CONTAINER_URL = '/api/containers/';
 
 module.exports = function (StorageFile) {
     StorageFile.upload = function (ctx, options, cb) {
+        console.info(ctx.req);
         options = options || {};
         // Firstly, you must create folder  /server/storage/common
         ctx.req.params.container = 'common';
@@ -23,7 +24,10 @@ module.exports = function (StorageFile) {
                     // The 'file'below should be the same as field name in the form
                     var fileInfoArr = fileObj.files.file;
                     var objs = [];
+
+                    console.info(fileObj.files);
                     fileInfoArr.forEach(function (item) {
+                        
                         objs.push({
                             name: item.name,
                             type: item.type,
@@ -31,6 +35,7 @@ module.exports = function (StorageFile) {
                                 '/download/' + item.name,
                         });
                     });
+                    console.log(objs);
                     StorageFile.create(objs, function (err, instances) {
                         if (err) {
                             return cb(null, {

@@ -11,7 +11,8 @@
       "type": "number"
     },
     "Content": {
-      "type": "String"
+      "type": "String",
+      "default": ""
     },
     "Picture": {
       "type": [
@@ -19,7 +20,8 @@
       ]
     },
     "PhoneNumber": {
-      "type": "String"
+      "type": "String",
+      "default": ""
     },
     "PraiseNum": {
       "type": "Number",

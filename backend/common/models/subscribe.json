@@ -11,10 +11,12 @@
       "type": "Number"
     },
     "first": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     },
     "second": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     }
   },
   "validations": [],

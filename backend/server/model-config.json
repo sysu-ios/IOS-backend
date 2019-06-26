@@ -35,10 +35,6 @@
     "dataSource": "db",
     "public": false
   },
-  "test": {
-    "dataSource": "db",
-    "public": true
-  },
   "Account": {
     "dataSource": "ios",
     "public": true

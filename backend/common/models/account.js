@@ -124,7 +124,6 @@ module.exports = function (Account) {
       }
       
     });
-    
   };
   Account.changePd = function (user, cb) {
     Account.findOne({ where: { PhoneNumber: user.PhoneNumber } }, function (err, instance) {

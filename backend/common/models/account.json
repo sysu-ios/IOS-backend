@@ -11,31 +11,40 @@
       "type": "Number"
     },
     "PhoneNumber": {
-      "type": "String"
+      "type": "String",
+      "default": ""
     },
     "UserName": {
-      "type": "String"
+      "type": "String",
+      "default": ""
     },
     "Password": {
-      "type": "String"
+      "type": "String",
+      "default": ""
     },
     "UserIcon": {
-      "type": "String"
+      "type": "String",
+      "default": ""
     },
     "Email": {
-      "type": "String"
+      "type": "String",
+      "default": ""
     },
     "Introduction": {
-      "type": "String"
+      "type": "String",
+      "default": ""
     },
     "Sex": {
-      "type": "String"
+      "type": "String",
+      "default": ""
     },
     "Birthday": {
-      "type": "String"
+      "type": "String",
+      "default": ""
     },
     "Region": {
-      "type": "String"
+      "type": "String",
+      "default": ""
     },
     "PostNum": {
       "type": "Number",

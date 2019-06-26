@@ -11,13 +11,16 @@
       "type": "number"
     },
     "type": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     },
     "url": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     }
   },
   "validations": [],

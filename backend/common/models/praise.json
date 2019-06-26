@@ -19,7 +19,8 @@
         "default": 0
       },
       "UserPhone": {
-        "type": "String"
+        "type": "String",
+        "default": ""
       },
       "createdAt": {
         "type": "date"

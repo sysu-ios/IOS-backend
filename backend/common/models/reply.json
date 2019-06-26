@@ -11,13 +11,16 @@
         "type": "number"
       },
       "CommentId": {
-        "type": "number"
+        "type": "number",
+        "default": 0
       },
       "UserPhone": {
-        "type": "String"
+        "type": "String",
+        "default": ""
       },
       "Content": {
-        "type": "String"
+        "type": "String",
+        "default": ""
       },
       "ReplyNum": {
         "type": "Number",

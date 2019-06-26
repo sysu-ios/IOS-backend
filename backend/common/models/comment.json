@@ -11,13 +11,16 @@
       "type": "number"
     },
     "ArticleId": {
-      "type": "number"
+      "type": "number",
+      "default": 0
     },
     "UserPhone": {
-      "type": "String"
+      "type": "String",
+      "default": ""
     },
     "Content": {
-      "type": "String"
+      "type": "String",
+      "default": ""
     },
     "PraiseNum": {
       "type": "Number",
