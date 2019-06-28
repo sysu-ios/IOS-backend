@@ -8,7 +8,7 @@ ds.automigrate('Comment', function (err) {
 
     var accounts = [
         {
-            ArticleId: 1,
+            ArticleId: "s",
             UserPhone: '17620124723',
             Content: '',
             PraiseNum: 0,

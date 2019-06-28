@@ -8,7 +8,7 @@ ds.automigrate('Praise', function (err) {
 
     var accounts = [
         {
-            ArticleId: 0,
+            ArticleId: '0',
             CommentId: 1,
             UserPhone: '17620124723',
             createdAt: new Date(),

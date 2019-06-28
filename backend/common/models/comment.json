@@ -11,8 +11,8 @@
       "type": "number"
     },
     "ArticleId": {
-      "type": "number",
-      "default": 0
+      "type": "string",
+      "default": ""
     },
     "UserPhone": {
       "type": "String",

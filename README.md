@@ -1,4 +1,4 @@
-# Feeds流后端API
+#                 Feeds流后端API
 
 `API`: http://localhost:3000/explorer
 
@@ -472,7 +472,102 @@ http://localhost:3000/api/subscribe
 ]
 ```
 
+#### 获取未关注的用户列表`get`
 
+```
+http://localhost:3000/api/subscribe/getUnsubscribe
+```
+
+参数：
+
+```
+phone：string
+```
+
+返回：
+
+```json
+{
+  "response": {
+    "code": 200,
+    "message": "success",
+    "data": [
+      {
+        "id": 2,
+        "PhoneNumber": "17620124723",
+        "UserName": "test1",
+        "Password": "test1",
+        "UserIcon": "",
+        "Email": "1299927852@qq.com",
+        "Introduction": "test1",
+        "Sex": "man",
+        "Birthday": "1997-08-07",
+        "Region": "guangdong",
+        "PostNum": 1,
+        "PraiseNum": 2,
+        "AttentionNum": 0,
+        "FanNum": 4,
+        "createdAt": "2019-06-28T11:52:15.013Z",
+        "lastModifiedAt": "2019-06-28T11:52:15.013Z"
+      },
+      {
+        "id": 3,
+        "PhoneNumber": "17620124725",
+        "UserName": "test",
+        "Password": "test",
+        "UserIcon": "",
+        "Email": "",
+        "Introduction": "",
+        "Sex": "",
+        "Birthday": "",
+        "Region": "",
+        "PostNum": 0,
+        "PraiseNum": 0,
+        "AttentionNum": 0,
+        "FanNum": 0,
+        "createdAt": "2019-06-28T11:56:09.633Z",
+        "lastModifiedAt": "2019-06-28T11:56:09.633Z"
+      },
+      {
+        "id": 4,
+        "PhoneNumber": "17620124726",
+        "UserName": "test",
+        "Password": "test",
+        "UserIcon": "",
+        "Email": "",
+        "Introduction": "",
+        "Sex": "",
+        "Birthday": "",
+        "Region": "",
+        "PostNum": 0,
+        "PraiseNum": 0,
+        "AttentionNum": 0,
+        "FanNum": 0,
+        "createdAt": "2019-06-28T11:56:15.019Z",
+        "lastModifiedAt": "2019-06-28T11:56:15.019Z"
+      },
+      {
+        "id": 5,
+        "PhoneNumber": "17620124727",
+        "UserName": "test",
+        "Password": "test",
+        "UserIcon": "",
+        "Email": "",
+        "Introduction": "",
+        "Sex": "",
+        "Birthday": "",
+        "Region": "",
+        "PostNum": 0,
+        "PraiseNum": 0,
+        "AttentionNum": 0,
+        "FanNum": 0,
+        "createdAt": "2019-06-28T11:56:19.394Z",
+        "lastModifiedAt": "2019-06-28T11:56:19.394Z"
+      }
+    ]
+  }
+}
+```
 
 ## 文章
 
@@ -756,7 +851,7 @@ http://localhost:3000/api/comment/post
 
 ```json
 {
-  "ArticleId": 1,
+  "ArticleId": "1",
   "UserPhone": "17620124723",
   "Content": "string"
 }
@@ -797,44 +892,26 @@ ArticleId: 1
     "message": "success",
     "data": [
       {
+        "id": 2,
+        "ArticleId": "1",
+        "UserName": "test1",
+        "UserIcon": "",
+        "Content": "string",
+        "ReplyNum": 0,
+        "PraiseNum": 0,
+        "createdAt": "2019-06-28T12:10:52.621Z",
+        "lastModifiedAt": "2019-06-28T12:10:52.621Z"
+      },
+      {
         "id": 3,
-        "ArticleId": 1,
-        "UserPhone": "17620124723",
+        "ArticleId": "1",
+        "UserName": "test2",
+        "UserIcon": "",
         "Content": "string",
-        "PraiseNum": 0,
         "ReplyNum": 0,
-        "createdAt": "2019-06-22T08:02:24.626Z",
-        "lastModifiedAt": "2019-06-22T08:02:24.626Z"
-      },
-      {
-        "id": 4,
-        "ArticleId": 1,
-        "UserPhone": "17620124723",
-        "Content": "string",
         "PraiseNum": 0,
-        "ReplyNum": 0,
-        "createdAt": "2019-06-22T08:53:55.708Z",
-        "lastModifiedAt": "2019-06-22T08:53:55.708Z"
-      },
-      {
-        "id": 5,
-        "ArticleId": 1,
-        "UserPhone": "17620124723",
-        "Content": "string",
-        "PraiseNum": 0,
-        "ReplyNum": 0,
-        "createdAt": "2019-06-22T08:56:52.868Z",
-        "lastModifiedAt": "2019-06-22T08:56:52.868Z"
-      },
-      {
-        "id": 6,
-        "ArticleId": 1,
-        "UserPhone": "17620124723",
-        "Content": "string",
-        "PraiseNum": 0,
-        "ReplyNum": 0,
-        "createdAt": "2019-06-23T14:00:44.758Z",
-        "lastModifiedAt": "2019-06-23T14:00:44.758Z"
+        "createdAt": "2019-06-28T12:11:01.920Z",
+        "lastModifiedAt": "2019-06-28T12:11:01.920Z"
       }
     ]
   }
