@@ -421,13 +421,21 @@ phone: "17620124723"
     "data": [
       {
         "id": 1,
-        "first": "17620124723",
-        "second": "17620124724"
-      },
-      {
-        "id": 2,
-        "first": "17620124723",
-        "second": "17620124725"
+        "PhoneNumber": "17620124724",
+        "UserName": "test2",
+        "Password": "test2",
+        "UserIcon": "",
+        "Email": "1299927852@qq.com",
+        "Introduction": "test2",
+        "Sex": "woman",
+        "Birthday": "1997-08-07",
+        "Region": "guangdong",
+        "PostNum": 1,
+        "PraiseNum": 2,
+        "AttentionNum": 0,
+        "FanNum": 4,
+        "createdAt": "2019-06-28T06:51:13.908Z",
+        "lastModifiedAt": "2019-06-28T06:51:13.908Z"
       }
     ]
   }
@@ -1196,15 +1204,15 @@ http://localhost:3000/api/praise/post
 参数：
 
 ```json
-//对文章点赞 设置评论id为0
+//对文章点赞或取消点赞 设置评论id为0
 {
-  "ArticleId": 1,
+  "ArticleId": "1",
   "CommentId": 0,
   "UserPhone": "17620124723"
 }
-//对评论点赞 设置文章id为0
+//对评论点赞或取消点赞 设置文章id为0
 {
-  "ArticleId": 0,
+  "ArticleId": "",
   "CommentId": 1,
   "UserPhone": "17620124723"
 }
@@ -1345,31 +1353,6 @@ phone：17620124723
     "code": 200,
     "message": "warning",
     "error": "no Praise"
-  }
-}
-```
-
-#### 取消点赞`delete`
-
-```
-http://localhost:3000/api/praise/delete
-```
-
-参数：
-
-```
-id：1
-```
-
-返回：
-
-```json
-//count 表示删除的项目数
-{
-  "response": {
-    "code": 200,
-    "message": "success",
-    "count": 1
   }
 }
 ```

@@ -14,17 +14,94 @@ module.exports = function (Praise) {
         next();
     });
 
-    //点赞
+    //点赞或取消点赞
     Praise.post = function (data, cb) {
-        Praise.create(data, function (err, instance) {
+        Praise.create(data, function (err, instance1) {
             var res = {
                 code: 201,
                 message: 'success',
-                PraiseId: instance.id
+                PraiseId: instance1.id
             };
-            console.info(instance);
+            console.info(instance1);
             cb(null, res);
         });
+        /*
+        Praise.find({
+            where: {
+                and: { and: { ArticleId: data.ArticleId, CommentId: data.CommentId }, UserPhone: data.UserPhone }}}, function(err, instance) {
+                    if (instance.length == 0) {
+                        
+                    }
+                    else {
+                        Praise.destroyAll({ id: instance[0].id }, function (err, info) {
+                            if (err) {
+                                return cb(null, {
+                                    code: 200,
+                                    message: 'fail',
+                                    error: err.message
+                                });
+                            }
+                            cb(null, {
+                                code: 200,
+                                message: 'success',
+                                count: info.count
+                            });
+                        });
+                    }
+                });
+                */
+               /*
+               if (data.ArticleId == "") {
+            Praise.find({
+                where: {
+                    and: { UserPhone: data.UserPhone, CommentId: data.CommentId }
+                }, function(err, instance) {
+                    if (instance.length == 0) {
+                        Praise.create(data, function (err, instance1) {
+                            var Comment = app.models.Comment;
+                            Comment.findOne({ where: { id: data.CommentId } }, function (err, instance2) {
+                                if (instance2 != null) {
+                                    Comment.updateAll({ id: data.CommentId }, { PraiseNum: instance2.PraiseNum + 1 }, function (err, instance3) {
+                                        var res = {
+                                            code: 201,
+                                            message: 'success',
+                                            PraiseId: instance1.id
+                                        };
+                                        cb(null, res);
+                                    });
+                                }
+                            });
+                        });
+                    }
+                    else {
+                        Praise.destroyAll({ id: instance[0].id }, function (err, info) {
+                            if (err) {
+                                return cb(null, {
+                                    code: 200,
+                                    message: 'fail',
+                                    error: err.message
+                                });
+                            }
+                            if (data.ArticleId == "") {
+                                var Comment = app.models.Comment;
+                                Comment.findOne({ where: { id: data.CommentId } }, function (err, instance2) {
+                                    if (instance2 != null) {
+                                        Comment.updateAll({ id: data.CommentId }, { PraiseNum: instance2.PraiseNum - 1 }, function (err, instance3) {
+                                            cb(null, {
+                                                code: 200,
+                                                message: 'success',
+                                                count: info.count
+                                            });
+                                            cb(null, res);
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+        }
+        */
     };
     //获取某个文章或评论的全部点赞
     Praise.getPraiseList = function (data, cb) {
@@ -49,8 +126,8 @@ module.exports = function (Praise) {
                 }
             });
         }
-        else if(data.CommentId != 0) {
-            
+        else if (data.CommentId != 0) {
+
             Praise.find({ where: { CommentId: data.CommentId } }, function (err, instance) {
                 if (instance.length == 0) {
                     var res = {
@@ -70,7 +147,7 @@ module.exports = function (Praise) {
                 }
             });
         }
-        
+
     };
     //获取我的点赞
     Praise.getMyPraiseList = function (phone, cb) {
@@ -93,23 +170,6 @@ module.exports = function (Praise) {
             }
         });
     };
-    //删除某个点赞
-    Praise.delete = function (id, cb) {
-        Praise.destroyAll({ id: id }, function (err, info) {
-            if (err) {
-                return cb(null, {
-                    code: 200,
-                    message: 'fail',
-                    error: err.message
-                });
-            }
-            cb(null, {
-                code: 200,
-                message: 'success',
-                count: info.count
-            });
-        });
-    };
 
 
     Praise.remoteMethod('post',
@@ -130,10 +190,5 @@ module.exports = function (Praise) {
             accepts: { arg: 'phone', type: 'string', required: true, http: { source: 'query' } },
             returns: { arg: 'response', type: 'object' }
         });
-    Praise.remoteMethod('delete',
-        {
-            http: { path: '/delete', verb: 'delete' },
-            accepts: { arg: 'id', type: 'number', required: true, http: { source: 'query' } },
-            returns: { arg: 'response', type: 'object' }
-        });
+
 };

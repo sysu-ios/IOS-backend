@@ -32,7 +32,7 @@ module.exports = function (Comment) {
     Comment.getCommentList = function (ArticleId, cb) {
         var Account = app.models.Account;
         
-        Comment.find({ where: { ArticleId: ArticleId } }, function (err, instance) {
+        Comment.find({ where: { ArticleId: ArticleId },order: "createdAt desc" }, function (err, instance) {
             if (instance.length == 0) {
                 var res = {
                     code: 200,
@@ -93,7 +93,7 @@ module.exports = function (Comment) {
     };
     //获取用户发表的评论
     Comment.getMyCommentList = function (phone, cb) {
-        Comment.find({ where: { UserPhone: phone } }, function (err, instance) {
+        Comment.find({ where: { UserPhone: phone } ,order: "createdAt desc"}, function (err, instance) {
             if (instance.length == 0) {
                 var res = {
                     code: 200,

@@ -14,36 +14,8 @@ module.exports = function (Subscribe) {
             cb(null, res);
         });
     };
+    
     Subscribe.getByPhone = function (phone, cb) {
-        Subscribe.find({ where: { first: phone } }, function (err, instance) {
-            if (err) {
-                var res = {
-                    code: 200,
-                    message: 'fail',
-                    error: err
-                };
-                cb(null, res);
-            }
-            else if (instance.length == 0) {
-                var res = {
-                    code: 200,
-                    message: 'fail',
-                    error: 'no subscribe'
-                };
-                cb(null, res);
-            }
-            else {
-                var res = {
-                    code: 200,
-                    message: 'success',
-                    data: instance
-                };
-                cb(null, res);
-            }
-        });
-    };
-
-    Subscribe.getUnsubscribe = function (phone, cb) {
         var Account = app.models.Account;
         Subscribe.find({ where: { first: phone } }, function (err, instance) {
             if (err) {
@@ -54,11 +26,45 @@ module.exports = function (Subscribe) {
                 };
                 cb(null, res);
             }
-            else if (instance.length == 0) {
+            else {
+                var hasPhone= [];
+                instance.forEach(function (item) {
+                    hasPhone.push(item.second);
+                });
+                console.log(hasPhone) ;
+                Account.find({ where: { PhoneNumber: { "inq": hasPhone } } }, function (err, instance1) {
+                    if (instance1.length == 0) {
+                        var res = {
+                            code: 200,
+                            message: 'fail',
+                            error: 'no account'
+                        };
+                        cb(null, res);
+                    }
+                    else {
+                        var res = {
+                            code: 200,
+                            message: 'success',
+                            data: instance1
+                        };
+                        cb(null, res);
+                    }
+                   
+                });  
+                
+            }
+        });
+            
+    };
+
+    Subscribe.getUnsubscribe = function (phone, cb) {
+        var Account = app.models.Account;
+        Subscribe.find({ where: { first: phone } }, function (err, instance) {
+            if (err) {
                 var res = {
                     code: 200,
                     message: 'fail',
-                    error: 'no subscribe'
+                    error: err
                 };
                 cb(null, res);
             }

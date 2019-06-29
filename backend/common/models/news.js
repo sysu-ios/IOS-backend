@@ -80,7 +80,7 @@ module.exports = function (News) {
 
                     else {
 
-                        News.find({ where: { PhoneNumber: { "inq": resPhone } } }, function (err, instance2) {
+                        News.find({ where: { PhoneNumber: { "inq": resPhone } },order: "createdAt desc" }, function (err, instance2) {
                             if (instance2.length == 0) {
                                 var res = {
                                     code: 200,
@@ -146,7 +146,7 @@ module.exports = function (News) {
             }
 
             else {
-                News.find({ where: { PhoneNumber: phone } }, function (err, instance2) {
+                News.find({ where: { PhoneNumber: phone },order: "createdAt desc" }, function (err, instance2) {
                     if (instance2.length == 0) {
                         var res = {
                             code: 200,
