@@ -8,8 +8,8 @@ ds.automigrate('Subscribe', function (err) {
 
     var accounts = [
         {
-            first: '17620124723',
-            second: '17620124724'
+            first: 'test',
+            second: 'test'
         }
     ];
     var count = accounts.length;

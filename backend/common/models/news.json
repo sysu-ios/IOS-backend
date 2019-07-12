@@ -10,6 +10,10 @@
     "id": {
       "type": "number"
     },
+    "ArticleId": {
+      "type": "String",
+      "default": ""
+    },
     "Content": {
       "type": "String",
       "default": ""

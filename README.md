@@ -593,6 +593,12 @@ http://localhost:3000/api/news/post
   "Picture": ["string","string","string"],
   "PhoneNumber": "17620124724"
 }
+//添加文章
+{
+  "ArticleId": "string",
+  "PhoneNumber": "17620124723",
+  "Content": ""
+}
 ```
 
 返回：
@@ -859,7 +865,7 @@ http://localhost:3000/api/comment/post
 
 ```json
 {
-  "ArticleId": "1",
+  "ArticleId": "q260BmEU5cED+KCdYKa0RQ==",
   "UserPhone": "17620124723",
   "Content": "string"
 }

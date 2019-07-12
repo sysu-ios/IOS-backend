@@ -17,15 +17,28 @@ module.exports = function (Comment) {
     Comment.post = function (data, cb) {
         var News = app.models.News;
         Comment.create(data, function (err, instance) {
+            News.findOne({where: {ArticleId:data.ArticleId}},function(err,instance1){
+                if (instance1 == null) {
+                    var res = {
+                      code: 200,
+                      message: 'fail',
+                      error: 'no news'
+                    };
+                    cb(null, res);
+                  }
+                  
+                  else {
+                    News.updateAll({ArticleId:data.ArticleId}, { CommentNum: instance1.CommentNum+1 }, function (err, instance2) {});
+                    console.info(instance1.CommentNum);
+                    var res = {
+                        code: 201,
+                        message: 'success',
+                        CommentId: instance.id
+                    };
+                    cb(null, res);
+                  }
+            });
             
-            //News.find(where:{})
-            var res = {
-                code: 201,
-                message: 'success',
-                CommentId: instance.id
-            };
-            console.info(instance);
-            cb(null, res);
         });
     };
     //获取某个文章的全部评论（不包含回复）

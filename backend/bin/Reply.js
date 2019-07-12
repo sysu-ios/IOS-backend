@@ -9,7 +9,7 @@ ds.automigrate('Reply', function (err) {
     var accounts = [
         {
             CommentId: 1,
-            UserPhone: '17620124723',
+            UserPhone: 'test',
             Content: '',
             ReplyNum: 0,
             createdAt: new Date(),

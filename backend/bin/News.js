@@ -8,7 +8,8 @@ ds.automigrate('News', function (err) {
 
     var accounts = [
         {
-            PhoneNumber: '17620124723',
+            ArticleId: "",
+            PhoneNumber: 'test',
             Picture: ['/api/containers/common/download/snipaste_2019-06-04_14-18-031560957756108.png'],
             Content: '',
             PraiseNum: 2,

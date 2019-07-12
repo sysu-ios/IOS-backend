@@ -10,7 +10,7 @@ ds.automigrate('Praise', function (err) {
         {
             ArticleId: '0',
             CommentId: 1,
-            UserPhone: '17620124723',
+            UserPhone: 'test',
             createdAt: new Date(),
             lastModifiedAt: new Date()
         }

@@ -14,16 +14,42 @@ module.exports = function (News) {
         next();
     });
     News.post = function (data, cb) {
-        console.info(data.PhoneNumber);
-        News.create(data, function (err, instance) {
-            var res = {
-                code: 201,
-                message: 'success',
-                articleId: instance.id
-            };
-            console.info(instance);
-            cb(null, res);
-        });
+        console.info(data);
+        if (data.Content == "") {
+            News.find({where:{ArticleId:data.ArticleId}},function(err,instance1){
+                if (instance1.length == 0) {
+                    News.create(data, function (err, instance) {
+                        var res = {
+                            code: 201,
+                            message: 'success',
+                            articleId: instance.id
+                        };
+                        console.info(instance);
+                        cb(null, res);
+                    });
+                }
+                else {
+                    return cb(null, {
+                        code: 200,
+                        message: 'fail',
+                        error: "exist news"
+                    });
+                }
+            });
+        }
+        else {
+            News.create(data, function (err, instance) {
+                News.updateAll({id: instance.id}, { ArticleId: instance.id }, function (err, instance2) {});
+                var res = {
+                    code: 201,
+                    message: 'success',
+                    articleId: instance.id
+                };
+                console.info(instance);
+                cb(null, res);
+            });
+        }
+ 
     };
     News.delete = function (id, cb) {
         console.info(id);

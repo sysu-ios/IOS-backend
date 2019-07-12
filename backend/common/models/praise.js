@@ -15,93 +15,135 @@ module.exports = function (Praise) {
     });
 
     //点赞或取消点赞
-    Praise.post = function (data, cb) {
-        Praise.create(data, function (err, instance1) {
-            var res = {
-                code: 201,
-                message: 'success',
-                PraiseId: instance1.id
-            };
-            console.info(instance1);
-            cb(null, res);
-        });
-        /*
-        Praise.find({
-            where: {
-                and: { and: { ArticleId: data.ArticleId, CommentId: data.CommentId }, UserPhone: data.UserPhone }}}, function(err, instance) {
-                    if (instance.length == 0) {
-                        
-                    }
-                    else {
-                        Praise.destroyAll({ id: instance[0].id }, function (err, info) {
-                            if (err) {
-                                return cb(null, {
-                                    code: 200,
-                                    message: 'fail',
-                                    error: err.message
-                                });
-                            }
-                            cb(null, {
+    Praise.post = function (data, cb) { 
+               
+        if (data.ArticleId == "") {//对评论点赞
+            Praise.find({where: { and: [{ UserPhone: data.UserPhone}, {CommentId: data.CommentId }]}}, function(err, instance) {
+                console.info(instance);
+                if (instance.length == 0) {//对评论点赞
+                    var Comment = app.models.Comment;
+                    Comment.findOne({ where: { id: data.CommentId } }, function (err, instance2) {
+                        if (instance2 != null) {
+                            Comment.updateAll({ id: data.CommentId }, { PraiseNum: instance2.PraiseNum + 1 }, function (err, instance3) {
+                                Praise.create(data, function (err, instance1) {
+                                    var res = {
+                                        code: 201,
+                                        message: 'success',
+                                        PraiseId: instance1.id
+                                    };
+                                    cb(null, res);
+                                });   
+                            });
+                        }
+                        else {
+                            return cb(null, {
                                 code: 200,
-                                message: 'success',
-                                count: info.count
+                                message: 'fail',
+                                error: "no comment"
                             });
-                        });
-                    }
-                });
-                */
-               /*
-               if (data.ArticleId == "") {
-            Praise.find({
-                where: {
-                    and: { UserPhone: data.UserPhone, CommentId: data.CommentId }
-                }, function(err, instance) {
-                    if (instance.length == 0) {
-                        Praise.create(data, function (err, instance1) {
-                            var Comment = app.models.Comment;
-                            Comment.findOne({ where: { id: data.CommentId } }, function (err, instance2) {
-                                if (instance2 != null) {
-                                    Comment.updateAll({ id: data.CommentId }, { PraiseNum: instance2.PraiseNum + 1 }, function (err, instance3) {
-                                        var res = {
-                                            code: 201,
-                                            message: 'success',
-                                            PraiseId: instance1.id
-                                        };
-                                        cb(null, res);
+                        }
+                    });
+                    
+                }
+                else {//取消评论点赞
+                    Praise.destroyAll({ id: instance[0].id }, function (err, info) {
+                        if (err) {
+                            return cb(null, {
+                                code: 200,
+                                message: 'fail',
+                                error: err.message
+                            });
+                        }
+                    
+                        var Comment = app.models.Comment;
+                        Comment.findOne({ where: { id: data.CommentId } }, function (err, instance2) {
+                            if (instance2 != null) {
+                                Comment.updateAll({ id: data.CommentId }, { PraiseNum: instance2.PraiseNum - 1 }, function (err, instance3) {
+                                    cb(null, {
+                                        code: 200,
+                                        message: 'success',
+                                        count: info.count
                                     });
-                                }
-                            });
-                        });
-                    }
-                    else {
-                        Praise.destroyAll({ id: instance[0].id }, function (err, info) {
-                            if (err) {
+                                });
+                            }
+                            else {
                                 return cb(null, {
                                     code: 200,
                                     message: 'fail',
-                                    error: err.message
-                                });
-                            }
-                            if (data.ArticleId == "") {
-                                var Comment = app.models.Comment;
-                                Comment.findOne({ where: { id: data.CommentId } }, function (err, instance2) {
-                                    if (instance2 != null) {
-                                        Comment.updateAll({ id: data.CommentId }, { PraiseNum: instance2.PraiseNum - 1 }, function (err, instance3) {
-                                            cb(null, {
-                                                code: 200,
-                                                message: 'success',
-                                                count: info.count
-                                            });
-                                            cb(null, res);
-                                        });
-                                    }
+                                    error: "no comment"
                                 });
                             }
                         });
-                    }
-                });
+                    
+                    });
+                }
+            });
+        } 
+        else {
+            Praise.find({where: { and: [{ UserPhone: data.UserPhone}, {ArticleId: data.ArticleId }]}}, function(err, instance) {
+                console.info(instance);
+                if (instance.length == 0) {//对wenzhang点赞
+                    var News = app.models.News;
+                    console.info(data);
+                    News.findOne({ where: { ArticleId: data.ArticleId } }, function (err, instance2) {
+                        if (instance2 != null) {
+                            News.updateAll({ ArticleId: data.ArticleId }, { PraiseNum: instance2.PraiseNum + 1 }, function (err, instance3) {
+                                Praise.create(data, function (err, instance1) {
+                                    var res = {
+                                        code: 201,
+                                        message: 'success',
+                                        PraiseId: instance1.id
+                                    };
+                                    cb(null, res);
+                                });
+                                
+                            });
+                        }
+                        else {
+                            return cb(null, {
+                                code: 200,
+                                message: 'fail',
+                                error: "no news"
+                            });
+                        }
+                    });
+                    
+                }
+                else {//取消wenzhang点赞
+                    Praise.destroyAll({ id: instance[0].id }, function (err, info) {
+                        if (err) {
+                            return cb(null, {
+                                code: 200,
+                                message: 'fail',
+                                error: err.message
+                            });
+                        }
+                        var News = app.models.News;
+                        var ArticleId1 = parseInt(data.ArticleId);
+                        News.findOne({ where: { ArticleId: data.ArticleId } }, function (err, instance2) {
+                            if (instance2 != null) {
+                                News.updateAll({ ArticleId: data.ArticleId}, { PraiseNum: instance2.PraiseNum - 1 }, function (err, instance3) {
+                                    cb(null, {
+                                        code: 200,
+                                        message: 'success',
+                                        count: info.count
+                                    });
+                                });
+                            }
+                            else {
+                                return cb(null, {
+                                    code: 200,
+                                    message: 'fail',
+                                    error: "no news"
+                                });
+                            }
+                        });
+                    
+                    });
+                }
+            });    
         }
-        */
+        
     };
     //获取某个文章或评论的全部点赞
     Praise.getPraiseList = function (data, cb) {
