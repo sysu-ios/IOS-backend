@@ -240,8 +240,8 @@ module.exports = function (News) {
         });
     News.remoteMethod('delete',
         {
-            http: { path: '/delete', verb: 'delete' },
-            accepts: { arg: 'id', type: 'number', required: true, http: { source: 'query' } },
+            http: { path: '/delete', verb: 'get' },
+            accepts: { arg: 'id', type: 'string', required: true, http: { source: 'query' } },
             returns: { arg: 'response', type: 'object' }
         });
 };

@@ -613,7 +613,7 @@ http://localhost:3000/api/news/post
 }
 ```
 
-#### 删除文章`delete`
+#### 删除文章`get`
 
 ```
 http://localhost:3000/api/news/delete
@@ -622,7 +622,8 @@ http://localhost:3000/api/news/delete
 参数：
 
 ```
-id: 0
+//string
+id: 1
 ```
 
 返回：

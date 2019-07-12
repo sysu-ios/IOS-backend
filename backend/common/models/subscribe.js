@@ -97,6 +97,7 @@ module.exports = function (Subscribe) {
             }
         });
     };
+    
 
     Subscribe.remoteMethod('delete',
         {
