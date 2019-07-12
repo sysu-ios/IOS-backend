@@ -44,8 +44,9 @@ module.exports = function (Reply) {
     };
     //获取某个评论的全部回复
     Reply.getReplyList = function (CommentId, cb) {
+        console.info(CommentId);
         var Account = app.models.Account;
-        Reply.find({ where: { CommentId: CommentId },order: "createdAt desc" }, function (err, instance) {
+        Reply.find({ where: { CommentId: CommentId }, order: "createdAt desc" }, function (err, instance) {
             if (instance.length == 0) {
                 var res = {
                     code: 200,
@@ -55,7 +56,7 @@ module.exports = function (Reply) {
                 cb(null, res);
             }
             else {
-                Account.find(true, function (err, instance1) {
+                Account.find({ where: {}, order: "createdAt desc" }, function (err, instance1) {
                     if (instance1.length == 0) {
                         var res = {
                             code: 200,

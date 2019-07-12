@@ -12,9 +12,9 @@ ds.automigrate('News', function (err) {
             PhoneNumber: 'test',
             Picture: ['/api/containers/common/download/snipaste_2019-06-04_14-18-031560957756108.png'],
             Content: '',
-            PraiseNum: 2,
-            ShareNum: 2,
-            CommentNum: 3,
+            PraiseNum: 0,
+            ShareNum: 0,
+            CommentNum: 0,
             createdAt: new Date(),
             lastModifiedAt: new Date()
         }
